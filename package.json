@@ -39,17 +39,5 @@
   },
   "devDependencies": {
     "gh-pages": "^4.0.0"
-  },
-  "description": "---\r ## Описание\r Проект, рассказывающий о местах, которые посетил пользователь. Есть возможность редактировать свои данные, удалять карточки и добавлять новые, открывать их для просмотра, ставить или убирать лайк.\r Цель проекта: изучение React.js",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/NekitCudder/mesto-react.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/NekitCudder/mesto-react/issues"
   }
 }
