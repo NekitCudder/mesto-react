@@ -1,5 +1,5 @@
 import React from "react";
-import api from "../ustils/Api";
+import api from "../utils/Api";
 import Card from './Card';
 
 function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
@@ -19,7 +19,7 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
       .catch((err) => {
         console.log(`Ошибка загрузки данных с сервера: ${err}`);
       });
-  })
+  }, [])
 
   return (
     <main>
@@ -45,8 +45,8 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick }) {
 
       <section className="elements">
         <ul className="cards">
-          {cards.map((item, i) => {
-            return <Card card={item} key={i} onCardClick={onCardClick} />;
+          {cards.map((item) => {
+            return <Card card={item} key={item._id} onCardClick={onCardClick} />;
           })}
         </ul>
       </section>
