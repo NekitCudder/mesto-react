@@ -8,6 +8,7 @@
   text-rendering: optimizeLegibility;
 
   min-width: 320px;
+  min-height: 100vh;
   padding: 45px 0 60px;
   background-color: #000;
   margin: auto;

@@ -1,22 +1,21 @@
-import '../index.css';
-import Footer from './Footer';
+import React from 'react';
 import Header from './Header';
 import Main from './Main';
-import PopupWithForm from './PopupWithForm';
-import ImagePopup from './ImagePopup';
-import React from 'react';
-import { CurrentUserContext } from '../contexts/CurrentUserContext';
-import api from '../utils/Api';
+import Footer from './Footer';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup ';
+import ImagePopup from './ImagePopup';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import api from '../utils/api';
+
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState(null);
-  const [currentUser, setCurrentUser] = React.useState('');
+  const [currentUser, setCurrentUser] = React.useState([]);
   const [cards, setCards] = React.useState([]);
 
   //загрузка данных пользвоателя
@@ -52,32 +51,35 @@ function App() {
   //функция редактирования данных пользователя
   function handleUpdateUser(data) {
     api.editUserInfo(data)
-      .then((res) => setCurrentUser(res))
+      .then((res) => setCurrentUser(res));
+      closeAllPopups()
       .catch((err) => {
         console.log(`Ошибка редактирования данных пользователя: ${err}`);
       });
-    closeAllPopups();
+ 
   }
   //фнукция загрузки аватара
   function handleUpdateAvatar(data) {
     api.editAvatar(data)
-      .then((res) => setCurrentUser(res))
+      .then((res) => setCurrentUser(res));
+      closeAllPopups()
       .catch((err) => {
         console.log(`Ошибка загрузки нового аватара: ${err}`);
       });
-    closeAllPopups();
+
   }
 
   //функция добавления новой карточки
   function handleAddPlaceSubmit(data) {
     api.addNewCard(data)
       .then((newCard) => {
-        setCards([newCard, ...cards])
+        setCards([newCard, ...cards]);
+        closeAllPopups()
       })
       .catch((err) => {
         console.log(`Ошибка добавления новой карточки: ${err}`);
       });
-    closeAllPopups();
+  
   }
 
   //загрузка карточек с сервера
@@ -107,7 +109,7 @@ function App() {
   function handleCardDelete(card) {
     api.deleteCard(card._id)
       .then(() => {
-        setCards((state) => state.filter((c) => c._id === card._id));
+        setCards((state) => state.filter((c) => c._id !== card._id));
       })
       .catch((err) => {
         console.log(`Ошибка удаления карточки пользователя: ${err}`);
